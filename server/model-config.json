@@ -61,7 +61,8 @@
           "me": true,
           "deleteById": true,
           "updateAddress": true,
-          "updateById": true
+          "updateById": true,
+          "destroyAddressById": true
         }
       }
     }

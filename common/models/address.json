@@ -66,6 +66,12 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "updateAddress"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "destroyAddressById"
     }
   ],
   "methods": {
@@ -165,7 +171,7 @@
         }
       ],
       "http": {
-        "path": "/:id",
+        "path": "/delete",
         "verb": "delete"
       }
     },
@@ -221,6 +227,24 @@
       "http": {
         "path": "/:id",
         "verb": "put"
+      }
+    },
+    "destroyAddressById": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string"
+        }
+      ],
+      "returns": [
+        {
+          "type": "object",
+          "root": true
+        }
+      ],
+      "http": {
+        "path": "/:id",
+        "verb": "delete"
       }
     }
   }

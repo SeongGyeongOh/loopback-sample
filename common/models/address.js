@@ -76,9 +76,6 @@ module.exports = function(Address) {
 
 	Address.updateAddress = (mainAddress, req, cb) => {
 		Address.updateAll({
-			where: {
-				userId: req.userInfo.id.toString()
-			},
 			mainAddress: mainAddress
 		})
 		.then(result => {
@@ -100,4 +97,15 @@ module.exports = function(Address) {
 			return cb(error)
 		})
 	};
+
+	Address.destroyAddressById = (id, cb) => {
+		Address.destroyById({id: id})
+		.then(result => {
+			return cb(null, result);
+		})
+		.catch(error => {
+			logger.error(error);
+			return cb(error)
+		})
+	};	
 };
