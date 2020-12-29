@@ -1,0 +1,40 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "start": "pm2 delete hello-world; NODE_ENV=production pm2 start --name hello-world server/server.js --watch --ignore-watch=logs/*",
+    "posttest": "npm run lint"
+  },
+  "dependencies": {
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "dotenv": "^8.2.0",
+    "helmet": "^3.10.0",
+    "loopback": "^3.22.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^6.2.0",
+    "loopback-connector-mongodb": "^5.5.0",
+    "moment": "^2.29.1",
+    "pm2": "^4.5.1",
+    "serve-favicon": "^2.0.1",
+    "strong-error-handler": "^4.0.0",
+    "url": "^0.11.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "eslint-config-loopback": "^8.0.0"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "license": "UNLICENSED",
+  "description": "hello-world"
+}

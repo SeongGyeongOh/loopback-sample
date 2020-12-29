@@ -1,0 +1,227 @@
+{
+  "name": "address",
+  "plural": "address",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "mainAddress": {
+      "type": "string",
+      "required": true
+    },
+    "subAddress": {
+      "type": "string",
+      "required": true
+    },
+    "zipCode": {
+      "type": "string",
+      "required": true
+    },
+    "seq": {
+      "type": "number",
+      "required": true
+    },
+    "isMain": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "createAddressByUserId"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "findAll"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "me"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "updateAddress"
+    }
+  ],
+  "methods": {
+    "createAddressByUserId": {
+      "accepts": [
+        {
+          "arg": "mainAddress",
+          "type": "string"
+        },
+        {
+          "arg": "subAddress",
+          "type": "string"
+        },
+        {
+          "arg": "zipCode",
+          "type": "string"
+        },
+        {
+          "arg": "seq",
+          "type": "number"
+        },
+        {
+          "arg": "isMain",
+          "type": "boolean"
+        },
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "type": "object",
+          "root": true
+        }
+      ],
+      "http": {
+        "path": "/",
+        "verb": "post"
+      }
+    },
+    "findAll": {
+      "accepts": [],
+      "returns": [
+        {
+          "type": "object",
+          "root": true
+        }
+      ],
+      "http": {
+        "path": "/",
+        "verb": "get"
+      }
+    },
+    "me": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "type": "object",
+          "root": true
+        }
+      ],
+      "http": {
+        "path": "/me",
+        "verb": "get"
+      }
+    },
+    "deleteById": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string"
+        },
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "type": "object",
+          "root": true
+        }
+      ],
+      "http": {
+        "path": "/:id",
+        "verb": "delete"
+      }
+    },
+    "updateAddress": {
+      "accepts": [
+        {
+          "arg": "mainAddress",
+          "type": "string"
+        },
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "type": "object",
+          "root": true
+        }
+      ],
+      "http": {
+        "path": "/update",
+        "verb": "put"
+      }
+    },
+    "updateById": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string"
+        },
+        {
+          "arg": "data",
+          "type": "object"
+        },
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "type": "object",
+          "root": true
+        }
+      ],
+      "http": {
+        "path": "/:id",
+        "verb": "put"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "final:after": {
+    "./middleware/custom-error": {},
+    "strong-error-handler": {
+      "params": {
+        "debug": false,
+        "log": false
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "accessToken": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongoDs",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "user": {
+    "dataSource": "mongoDs",
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true,
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "create": true,
+          "createUserByParams": true,
+          "getUserById": false,
+          "login": true,
+          "me": true
+        }
+      }
+    }
+  },
+  "address": {
+    "dataSource": "mongoDs",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "createAddressByUserId": true,
+          "findAll": true,
+          "me": true,
+          "deleteById": true,
+          "updateAddress": true,
+          "updateById": true
+        }
+      }
+    }
+  }
+}
