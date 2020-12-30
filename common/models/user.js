@@ -44,7 +44,7 @@ module.exports = function(User) {
   }; 
 };
 
-//promise 문법
+//promise 문법(깃 push - pull 확인용 괄호임)
 //JS는 기본적으로 함수형 언어, 비동기가 기본
 //동기 처리를 하기 위한 문법
 
