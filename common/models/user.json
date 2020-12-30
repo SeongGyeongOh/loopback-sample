@@ -54,24 +54,6 @@
     }
   ],
   "methods": {
-    "createUserByParams": {
-      "accepts": [
-        {
-          "arg": "params",
-          "type": "object"
-        }
-      ],
-      "returns": [
-        {
-          "type": "object",
-          "root": true
-        }
-      ],
-      "http": {
-        "path": "/cu",
-        "verb": "post"
-      }
-    },
     "me": {
       "accepts": [
         {
@@ -91,6 +73,24 @@
       "http": {
         "path": "/me",
         "verb": "get"
+      }
+    },
+    "createUserByParams": {
+      "accepts": [
+        {
+          "arg": "params",
+          "type": "object"
+        }
+      ],
+      "returns": [
+        {
+          "type": "object",
+          "root": true
+        }
+      ],
+      "http": {
+        "path": "/cu",
+        "verb": "post"
       }
     }
   }

@@ -66,5 +66,20 @@
         }
       }
     }
+  },
+  "work": {
+    "dataSource": "mongoDs",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "createWorkInfoByUserId": true,
+          "findByUserId": true,
+          "deleteById": true,
+          "updateWorkInfo": true
+        }
+      }
+    }
   }
 }

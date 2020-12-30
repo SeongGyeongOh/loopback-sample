@@ -1,6 +1,6 @@
 {
-  "name": "address",
-  "plural": "address",
+  "name": "work",
+  "plural": "work",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,25 +9,20 @@
     "allowEternalTokens": true
   },
   "properties": {
-    "mainAddress": {
+    "department": {
       "type": "string",
       "required": true
     },
-    "subAddress": {
+    "position": {
       "type": "string",
       "required": true
     },
-    "zipCode": {
+    "address": {
       "type": "string",
       "required": true
     },
-    "seq": {
-      "type": "number",
-      "required": true
-    },
-    "isMain": {
-      "type": "boolean",
-      "required": true
+    "tel": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -43,67 +38,45 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
-      "property": "createAddressByUserId"
+      "property": "createWorkInfoByUserId"
     },
     {
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
-      "property": "findAll"
+      "property": "findByUserId"
     },
     {
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
-      "property": "me"
+      "property": "updateWorkInfo"
     },
     {
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "deleteById"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW",
-      "property": "updateAddress"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW",
-      "property": "updateById"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW",
-      "property": "destroyAddressById"
-    }
+    }       
   ],
   "methods": {
-    "createAddressByUserId": {
+    "createWorkInfoByUserId": {
       "accepts": [
         {
-          "arg": "mainAddress",
+          "arg": "department",
           "type": "string"
         },
         {
-          "arg": "subAddress",
+          "arg": "position",
           "type": "string"
         },
         {
-          "arg": "zipCode",
+          "arg": "address",
           "type": "string"
         },
         {
-          "arg": "seq",
-          "type": "number"
-        },
-        {
-          "arg": "isMain",
-          "type": "boolean"
+          "arg": "tel",
+          "type": "string"
         },
         {
           "arg": "req",
@@ -124,20 +97,7 @@
         "verb": "post"
       }
     },
-    "findAll": {
-      "accepts": [],
-      "returns": [
-        {
-          "type": "object",
-          "root": true
-        }
-      ],
-      "http": {
-        "path": "/",
-        "verb": "get"
-      }
-    },
-    "me": {
+    "findByUserId": {
       "accepts": [
         {
           "arg": "req",
@@ -158,57 +118,7 @@
         "verb": "get"
       }
     },
-    "deleteById": {
-      "accepts": [
-        {
-          "arg": "id",
-          "type": "string"
-        },
-        {
-          "arg": "req",
-          "type": "object",
-          "http": {
-            "source": "req"
-          }
-        }
-      ],
-      "returns": [
-        {
-          "type": "object",
-          "root": true
-        }
-      ],
-      "http": {
-        "path": "/:id",
-        "verb": "delete"
-      }
-    },
-    "updateAddress": {
-      "accepts": [
-        {
-          "arg": "mainAddress",
-          "type": "string"
-        },
-        {
-          "arg": "req",
-          "type": "object",
-          "http": {
-            "source": "req"
-          }
-        }
-      ],
-      "returns": [
-        {
-          "type": "object",
-          "root": true
-        }
-      ],
-      "http": {
-        "path": "/update",
-        "verb": "put"
-      }
-    },
-    "updateById": {
+    "updateWorkInfo": {
       "accepts": [
         {
           "arg": "id",
@@ -237,11 +147,18 @@
         "verb": "put"
       }
     },
-    "destroyAddressById": {
+    "deleteById": {
       "accepts": [
         {
           "arg": "id",
           "type": "string"
+        },
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
         }
       ],
       "returns": [
@@ -251,7 +168,7 @@
         }
       ],
       "http": {
-        "path": "/",
+        "path": "/:id",
         "verb": "delete"
       }
     }

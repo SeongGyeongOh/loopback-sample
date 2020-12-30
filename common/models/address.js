@@ -99,7 +99,7 @@ module.exports = function(Address) {
 	};
 
 	Address.destroyAddressById = (id, cb) => {
-		Address.destroyById({id: id})
+		Address.destroyById(id)
 		.then(result => {
 			return cb(null, result);
 		})
