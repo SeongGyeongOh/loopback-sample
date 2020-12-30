@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "pm2 delete hello-world; NODE_ENV=production pm2 start --name hello-world server/server.js --watch --ignore-watch=logs/*",
+    "start": "pm2 delete hello-world; NODE_ENV=production pm2 start --name hello-world2 server/server.js --watch --ignore-watch=logs/*",
     "posttest": "npm run lint"
   },
   "dependencies": {
