@@ -1,111 +1,56 @@
 'use strict';
 const logger = require('../../server/logger').slog;
+const AddressService = require('../service/address/addressService');
 
 module.exports = function(Address) {
-	//createAddressByUserId
+	const service = new AddressService(Address);
+
+	//Address.static / instance methods 호출하는거를 최대한 자제하기위해 Service를 별도 생성
 	Address.createAddressByUserId = (mainAddress, subAddress, zipCode, seq, isMain, req, cb) => {
-		Address.create({
+		return service.createAddress({
 			mainAddress: mainAddress,
 			subAddress: subAddress,
 			zipCode: zipCode,
 			seq: seq,
 			isMain: isMain,
 			userId: req.userInfo.id.toString()
-		})
-		.then(result => {
-			return cb(null, result);
-		})
-		.catch(error => {
-			logger.error(error)
-			return cb(error)
-		});
+		}, cb);
 	};
 
 	Address.findAll = (cb) => {
-		Address.find({})
-		.then(result => {
-		return cb(null, result);
-		})
-		.catch(error => {
-			logger.error(error)
-			return cb(error)
-		})
+		return service.getAddressList(cb);
 	}
 
 //토큰에 있는 유저아이디를 조건으로
 	Address.me = (req, cb) => {
-		Address.find({
+		return service.getAddressListByCondition({
 			where: {
-				userId: req.userInfo.id
+				userId: req.userInfo.id.toString()
 			},
 			order: 'seq ASC'
-		})
-		.then(result => {
-			return cb(null, result);
-		})
-		.catch(error => {
-			logger.error(error);
-			return cb(error)
 		})
 	};
 
 	Address.deleteById = (id, req, cb) => {
-		Address.findOne({
+		return service.deleteById({
 			where:{
 				and:[
 					{userId: req.userInfo.id.toString()},
 					{id: id}
 				]
 			}
-		})
-		.then(address => {
-			if(!address) {
-				throw new Error('에러에러');
-			}
-			return address.destroy()
-		})
-		.then(result => {
-			console.log('result', result);
-			return cb(null, result);
-		})
-		.catch(error => {
-			logger.error(error);
-			return cb(error)
-		})
+		}, cb);
 	};
 
 	Address.updateAddress = (mainAddress, req, cb) => {
-		Address.updateAll({
-			mainAddress: mainAddress
-		})
-		.then(result => {
-			return cb(null, result);
-		})
-		.catch(error => {
-			logger.error(error);
-			return cb(error)
-		})
+		return service.updateMainAddress({mainAddress:mainAddress}, cb)
 	};
 
 	Address.updateById = (id, data, req, cb) => {
-		Address.updateAll({id:id}, { ...data })
-		.then(result => {
-			return cb(null, result);
-		})
-		.catch(error => {
-			logger.error(error);
-			return cb(error)
-		})
+		return service.updateByCondition({id:id}, { ...data }, cb)
 	};
 
 	Address.destroyAddressById = (id, cb) => {
-		Address.destroyById(id)
-		.then(result => {
-			return cb(null, result);
-		})
-		.catch(error => {
-			logger.error(error);
-			return cb(error)
-		})
-	};	
-};
+		return service.destroyByCondition(id, cb)
+	};
+}
